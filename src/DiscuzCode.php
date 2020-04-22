@@ -1,6 +1,8 @@
 <?php
 namespace jiosen\sijiu;
 
+use think\Db;
+
 class DiscuzCode {
 
 	function absoluteurl($url) {
@@ -401,7 +403,7 @@ class DiscuzCode {
 	{
 		$data = cache('bbs_censor_data');
 		if(empty($data)){
-			$data = Db::name('common_syscache')->where(array('cname'=>'censor'))->getField('data');
+			$data = Db::name('common_syscache')->where(array('cname'=>'censor'))->value('data');
 			if($data){
 				$data = unserialize($data);
 				cache('bbs_censor_data',$data,600);
@@ -411,9 +413,9 @@ class DiscuzCode {
 	}
 	function get_bbcodes_display()
 	{
-		$data = cahe('bbs_bbcodes_display');
+		$data = cache('bbs_bbcodes_display');
 		if(empty($data)){
-			$data = Db::name('common_syscache')->where(array('cname'=>'bbcodes_display'))->getField('data');
+			$data = Db::name('common_syscache')->where(array('cname'=>'bbcodes_display'))->value('data');
 			if($data){
 				$data = unserialize($data);
 				cache('bbs_bbcodes_display',$data,864000);
